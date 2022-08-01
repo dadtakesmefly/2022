@@ -71,6 +71,6 @@ rem2px
   }
 
 
-  copyDirectory("E:\\project\\zebraman\\mini-car-banmaxia\\pages\\demo", "E:\\project\\zebraman\\mini-car-banmaxia\\pages\\demo")
+  copyDirectory("E:\\project\\demo", "E:\\project\\demo")
 ```
 
