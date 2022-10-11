@@ -388,4 +388,59 @@ rem2px
       };
 
     })()
+    
+
+App({
+    globalData: {
+        fontSize: '',
+
+        set() { }
+    },
+    Simple,
+    Page: function (params) {
+        var onload = params.onLoad;
+        params.onLoad = function (options) {
+            //打开获取屏幕大小
+            if (!Simple.Applet.getStorageSync('fontSize')) {
+                let fontSize;
+                let res = my.getSystemInfoSync();
+                console.log('同步获取App设备信息：', res);
+              
+                getApp().globalData.fontSize = fontSize
+                Simple.Applet.setStorageSync('fontSize', fontSize);
+            }
+
+            // getApp().globalData.set()
+            if (Simple.Applet.getStorageSync('fontSize')) {
+                // 拦截 添加公共参数
+                params.data.fontSize = Simple.Applet.getStorageSync('fontSize')
+            }
+            if (onload) {
+                onload.call(this, options);
+            }
+        }
+        Page(params);
+    },
+    Component: function (params) {
+        var onInit = params.onInit;
+        // getApp().globalData.set()
+        // 拦截 添加公共参数
+        params.data.fontSize = Simple.Applet.getStorageSync('fontSize')
+        params.onInit = function (options) {
+            if (onInit) {
+                onInit.call(this, options);
+            }
+        }
+        Component(params);
+    },
+
+    onLaunch(options) {
+
+    },
+    onShow(options) {
+        // 从后台被 scheme 重新打开
+
+    },
+});
+
       
